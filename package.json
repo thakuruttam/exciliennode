@@ -1,0 +1,24 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "@apollo/server": "^4.7.5",
+        "@types/axios": "^0.14.0",
+        "axios": "^1.4.0",
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "express-session": "^1.18.0",
+        "graphql": "^16.7.1",
+        "openid-client": "^5.6.4"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": " node api-server.js,node auth-server.js,node token-rotation"
+
+    },
+    "author": "",
+    "description": ""
+}

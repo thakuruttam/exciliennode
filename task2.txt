@@ -1,0 +1,132 @@
+// ques 1 -Write a function in JavaScript/Typescript that takes a string and returns the first non-repeating
+// character in it. Consider only alphabetic characters.
+
+
+function firstNonRepeatingCharacter(str) {
+    const charCount = {};
+    const alphabeticRegex = /[a-zA-Z]/;
+
+    for (const char of str) {
+        if (alphabeticRegex.test(char)) {
+            charCount[char] = (charCount[char] || 0) + 1;
+        }
+    }
+
+    for (const char of str) {
+        if (alphabeticRegex.test(char) && charCount[char] === 1) {
+            return char;
+        }
+    }
+
+    return null;
+}
+
+console.log(firstNonRepeatingCharacter("aabbccdef")); 
+
+
+//*Print a spiral square matrix without using any extra space.
+Given a positive number N, print an N × N spiral matrix containing numbers from 1 to N × N in a
+counterclockwise direction and without extra space.
+For example,
+Input: N = 5
+Output:
+25 24 23 22 21
+10 9 8 7 20
+11 2 1 6 19
+12 3 4 5 18
+13 14 15 16 17*//
+
+function printSpiralMatrix(N: number): void {
+    const matrix: number[][] = Array.from({ length: N }, () => Array(N).fill(0));
+
+    let counter = N * N;
+    let rowStart = 0;
+    let rowEnd = N - 1;
+    let colStart = 0;
+    let colEnd = N - 1;
+
+    while (rowStart <= rowEnd && colStart <= colEnd) {
+        // Print top row
+        for (let i = colEnd; i >= colStart; i--) {
+            matrix[rowStart][i] = counter--;
+        }
+        rowStart++;
+
+        // Print right column
+        for (let i = rowStart; i <= rowEnd; i++) {
+            matrix[i][colStart] = counter--;
+        }
+        colStart++;
+
+        // Print bottom row
+        for (let i = colStart; i <= colEnd; i++) {
+            matrix[rowEnd][i] = counter--;
+        }
+        rowEnd--;
+
+        // Print left column
+        for (let i = rowEnd; i >= rowStart; i--) {
+            matrix[i][colEnd] = counter--;
+        }
+        colEnd--;
+    }
+
+    for (const row of matrix) {
+        console.log(row.join(" "));
+    }
+}
+
+printSpiralMatrix(5);
+
+
+
+
+//*Find two odd occurring elements in an array without using any extra space
+
+Find two odd occurring elements in an array without using any extra space
+Given an integer array, duplicates appear in it an even number of times except for two
+elements, which appear an odd number of times. Find both odd appearing elements without
+using any extra memory.
+For example,
+Input: arr[] = [4, 3, 6, 2, 4, 2, 3, 4, 3, 3]
+Output: The odd occurring elements are 4 and 6
+6 appears once.
+2 appears twice.
+4 appears thrice.
+3 appears 4 times.*//
+
+
+
+
+function findTwoOddOccurringElements(arr) {
+    let xor = 0;
+
+    // Get the XOR of all elements
+    for (const num of arr) {
+        xor ^= num;
+    }
+
+    // Find the rightmost set bit
+    const rightmostSetBit = xor & -xor;
+
+    let x = 0;
+    let y = 0;
+
+    // Divide the array into two groups based on rightmost set bit
+    for (const num of arr) {
+        if ((num & rightmostSetBit) !== 0) {
+            x ^= num;
+        } else {
+            y ^= num;
+        }
+    }
+
+    return [x, y];
+}
+
+// Test case
+console.log(findTwoOddOccurringElements([4, 3, 6, 2, 4, 2, 3, 4, 3, 3])); // Output: [6, 4]
+
+
+
+
